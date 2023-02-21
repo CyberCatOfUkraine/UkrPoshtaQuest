@@ -14,10 +14,5 @@ namespace UkrPoshtaQuest.Models
         /// Інформація про компанію
         /// </summary>
         public string CompanyInfo { get; set; }
-
-        /// <summary>
-        /// Співробітники
-        /// </summary>
-        public int EmployeeId { get; set; }
     }
 }

@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbMagick\AddressRespository.cs" />
+    <Compile Include="DbMagick\CompanyRepository.cs" />
     <Compile Include="DbMagick\DbHelper\SQLManager.cs" />
     <Compile Include="DbMagick\EmployeeRepository.cs" />
     <Compile Include="DbMagick\IRepository.cs" />

@@ -161,10 +161,10 @@ namespace TestConsoleApp
                 System.Console.WriteLine(new string('-', 10));
             }
             var firstEmployee = employeeRepository.GetById(1);
-            firstEmployee.FullName = "Анатолій Іванович Свирид1";
+            firstEmployee.FullName = "Анатолій Іванович Свирид";
             employeeRepository.Update(firstEmployee);
             System.Console.WriteLine(
-            firstEmployee.FullName == "Анатолій Іванович Свирид1"
+            firstEmployee.FullName == "Анатолій Іванович Свирид"
                 );
 
             System.Console.ReadKey();
