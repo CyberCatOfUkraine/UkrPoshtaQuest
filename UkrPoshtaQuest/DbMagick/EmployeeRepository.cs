@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using UkrPoshtaQuest.DbMagick.DbHelper;
 using UkrPoshtaQuest.Models;
 
@@ -52,9 +54,9 @@ namespace UkrPoshtaQuest.DbMagick
             {
                 throw new Exception("Даний DepartmentID не існує, введіть реальний DepartmentID");
             }
-            var query = "INSERT INTO Employee " +
+            var query = $"INSERT INTO {nameof(Employee)} " +
                 "(FullName, DateOfBirth, AddressId, PhoneNumber, HireDate, Salary, DepartmentId, PositionId)" +
-                $"VALUES('{entity.FullName}', '{entity.DateOfBirth}', {entity.AddressId}, '{entity.PhoneNumber}', '{entity.HireDate}', {entity.Salary}, {entity.DepartmentId}, {entity.PositionId});";
+                $"VALUES('{entity.FullName}', '{entity.DateOfBirth.ToString("yyyy-MM-dd HH:mm:ss")}', {entity.AddressId}, '{entity.PhoneNumber}', '{entity.HireDate.ToString("yyyy-MM-dd HH:mm:ss")}', {entity.Salary}, {entity.DepartmentId}, {entity.PositionId});";
             new SQLManager().UpdateDatabase(query);
         }
 
@@ -79,17 +81,68 @@ namespace UkrPoshtaQuest.DbMagick
 
         public List<T> GetAll()
         {
-            throw new NotImplementedException();
+
+            var list = new SQLManager().GetValuesFromDatabase($"SELECT * FROM {nameof(Employee)}");
+            var employees = new List<Employee>();
+            foreach (dynamic item in list)
+            {
+                employees.Add(new Employee()
+                {
+                    Id = item[0],
+                    FullName = item[1],
+                    DateOfBirth = item[2],
+                    AddressId = item[3],
+                    PhoneNumber = item[4],
+                    HireDate = item[5],
+                    Salary = item[6],
+                    DepartmentId = item[7],
+                    PositionId = item[8]
+                });
+            }
+            return employees as List<T>;
         }
 
         public T GetById(int id)
         {
-            throw new NotImplementedException();
+            var list = new SQLManager().GetValuesFromDatabase($"SELECT * FROM {nameof(Employee)} WHERE Id={id}");
+            if (list.Count == 0)
+                return null;
+            dynamic item = list.First();
+
+            return new Employee()
+            {
+
+                Id = item[0],
+                FullName = item[1],
+                DateOfBirth = item[2],
+                AddressId = item[3],
+                PhoneNumber = item[4],
+                HireDate = item[5],
+                Salary = item[6],
+                DepartmentId = item[7],
+                PositionId = item[8]
+            } as T;
         }
 
         public void Update(T entity)
         {
-            throw new NotImplementedException();
+            if (new SQLManager().GetValuesFromDatabase($"SELECT * FROM {nameof(Employee)} WHERE Id={entity.Id}").Count == 0)
+            {
+                throw new Exception("За заданим ID не знайдено сутностей, оновлення не можливе");
+            }
+
+            var query = $"UPDATE {nameof(Employee)} " +
+            $"SET FullName = '{entity.FullName}', " +
+            $"DateOfBirth = '{entity.DateOfBirth.ToString("yyyy-MM-dd HH:mm:ss")}', " +
+            $"AddressId = '{entity.AddressId}', " +
+            $"PhoneNumber = '{entity.PhoneNumber}', " +
+            $"HireDate = '{entity.HireDate.ToString("yyyy-MM-dd HH:mm:ss")}', " +
+            $"Salary = '{entity.Salary.ToString(CultureInfo.InvariantCulture)}', " +
+            $"DepartmentId = '{entity.DepartmentId}', " +
+            $"PositionId = '{entity.PositionId}' " +
+            $"WHERE Id = {entity.Id};";
+
+            new SQLManager().UpdateDatabase(query);
         }
     }
 }
