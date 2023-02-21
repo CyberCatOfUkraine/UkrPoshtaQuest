@@ -8,6 +8,8 @@ namespace UkrPoshtaQuest.DbMagick
 {
     public class AddressRespository<T> : IRepository<T> where T : Address
     {
+        public int Count => new SQLManager().Count(nameof(Address));
+
         public AddressRespository()
         {
             TryCreateAddressTable();

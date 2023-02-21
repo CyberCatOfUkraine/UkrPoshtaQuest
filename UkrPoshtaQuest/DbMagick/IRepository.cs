@@ -10,5 +10,6 @@ namespace UkrPoshtaQuest.DbMagick
         void Update(T entity);
         void Delete(int id);
         void Clear();
+        int Count { get; }
     }
 }

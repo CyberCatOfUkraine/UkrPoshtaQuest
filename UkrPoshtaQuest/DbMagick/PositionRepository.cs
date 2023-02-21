@@ -8,6 +8,8 @@ namespace UkrPoshtaQuest.DbMagick
 {
     public class PositionRepository<T> : IRepository<T> where T : Position
     {
+        public int Count => new SQLManager().Count(nameof(Position));
+
         public PositionRepository()
         {
             TryCreatePositionTable();

@@ -184,6 +184,18 @@ namespace UkrPoshtaQuest.DbMagick.DbHelper
                 }
             }
         }
+        public int Count(string tableName)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
 
+                string query = $"SELECT COUNT(*) FROM {tableName}";
+                SqlCommand command = new SqlCommand(query, connection);
+                int count = (int)command.ExecuteScalar();
+
+                return count;
+            }
+        }
     }
 }
