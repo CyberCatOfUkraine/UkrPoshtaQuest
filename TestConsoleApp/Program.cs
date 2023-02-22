@@ -167,7 +167,7 @@ namespace TestConsoleApp
              firstEmployee.FullName == "Анатолій Іванович Свирид"
                  );
  */
-            CompanyRepository<Company> companyRepository = new CompanyRepository<Company>();
+            /*CompanyRepository<Company> companyRepository = new CompanyRepository<Company>();
             companyRepository.Add(new Company { CompanyInfo = "1" });
             companyRepository.Add(new Company { CompanyInfo = "2" });
             companyRepository.Add(new Company { CompanyInfo = "3" });
@@ -186,7 +186,7 @@ namespace TestConsoleApp
             System.Console.WriteLine("First item is " + companyRepository.GetById(1).Id + " : " + companyRepository.GetById(1).CompanyInfo);
             companyRepository.Delete(first.Id);
             System.Console.WriteLine("Count is :" + companyRepository.Count);
-            System.Console.ReadKey();
+            System.Console.ReadKey();*/
         }
     }
 }
