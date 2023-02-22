@@ -146,27 +146,46 @@ namespace TestConsoleApp
 
             //(FullName, DateOfBirth, AddressId, PhoneNumber, HireDate, Salary, DepartmentId, PositionId)
 
-            var employees = employeeRepository.GetAll();
-            foreach (var employee in employees)
+            /* var employees = employeeRepository.GetAll();
+             foreach (var employee in employees)
+             {
+                 System.Console.WriteLine("ID: " + employee.Id);
+                 System.Console.WriteLine("ПІБ: " + employee.FullName);
+                 System.Console.WriteLine("Номер телефону: " + employee.PhoneNumber);
+                 System.Console.WriteLine("ЗП: " + employee.Salary);
+                 System.Console.WriteLine("ДР: " + employee.DateOfBirth);
+                 System.Console.WriteLine("PositionId: " + employee.PositionId);
+                 System.Console.WriteLine("HireDate: " + employee.HireDate);
+                 System.Console.WriteLine("AddressId: " + employee.AddressId);
+                 System.Console.WriteLine("DepartmentId: " + employee.DepartmentId);
+                 System.Console.WriteLine(new string('-', 10));
+             }
+             var firstEmployee = employeeRepository.GetById(1);
+             firstEmployee.FullName = "Анатолій Іванович Свирид";
+             employeeRepository.Update(firstEmployee);
+             System.Console.WriteLine(
+             firstEmployee.FullName == "Анатолій Іванович Свирид"
+                 );
+ */
+            CompanyRepository<Company> companyRepository = new CompanyRepository<Company>();
+            companyRepository.Add(new Company { CompanyInfo = "1" });
+            companyRepository.Add(new Company { CompanyInfo = "2" });
+            companyRepository.Add(new Company { CompanyInfo = "3" });
+            companyRepository.Add(new Company { CompanyInfo = "4" });
+            companyRepository.Add(new Company { CompanyInfo = "5" });
+            System.Console.WriteLine("Count is 5: " + (companyRepository.Count == 5));
+            foreach (var company in companyRepository.GetAll())
             {
-                System.Console.WriteLine("ID: " + employee.Id);
-                System.Console.WriteLine("ПІБ: " + employee.FullName);
-                System.Console.WriteLine("Номер телефону: " + employee.PhoneNumber);
-                System.Console.WriteLine("ЗП: " + employee.Salary);
-                System.Console.WriteLine("ДР: " + employee.DateOfBirth);
-                System.Console.WriteLine("PositionId: " + employee.PositionId);
-                System.Console.WriteLine("HireDate: " + employee.HireDate);
-                System.Console.WriteLine("AddressId: " + employee.AddressId);
-                System.Console.WriteLine("DepartmentId: " + employee.DepartmentId);
-                System.Console.WriteLine(new string('-', 10));
+                System.Console.WriteLine("ID: " + company.Id);
+                System.Console.WriteLine("Info: " + company.CompanyInfo);
             }
-            var firstEmployee = employeeRepository.GetById(1);
-            firstEmployee.FullName = "Анатолій Іванович Свирид";
-            employeeRepository.Update(firstEmployee);
-            System.Console.WriteLine(
-            firstEmployee.FullName == "Анатолій Іванович Свирид"
-                );
-
+            System.Console.WriteLine("First item is " + companyRepository.GetById(1).Id + " : " + companyRepository.GetById(1).CompanyInfo);
+            var first = companyRepository.GetById(1);
+            first.CompanyInfo = "Abra-test-a-cadabra";
+            companyRepository.Update(first);
+            System.Console.WriteLine("First item is " + companyRepository.GetById(1).Id + " : " + companyRepository.GetById(1).CompanyInfo);
+            companyRepository.Delete(first.Id);
+            System.Console.WriteLine("Count is :" + companyRepository.Count);
             System.Console.ReadKey();
         }
     }
