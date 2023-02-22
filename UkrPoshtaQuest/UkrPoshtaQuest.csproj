@@ -89,6 +89,12 @@
     <Compile Include="Pages\Windows\EditCompanyInfoForm.Designer.cs">
       <DependentUpon>EditCompanyInfoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Windows\FormWithEmployeesFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\Windows\FormWithEmployeesFilter.Designer.cs">
+      <DependentUpon>FormWithEmployeesFilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -106,6 +112,9 @@
     <EmbeddedResource Include="Pages\Windows\EditCompanyInfoForm.resx">
       <DependentUpon>EditCompanyInfoForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Windows\FormWithEmployeesFilter.resx">
+      <DependentUpon>FormWithEmployeesFilter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -115,7 +124,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="Properties\DataSources\UkrPoshtaQuest.Models.Company.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
