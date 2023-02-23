@@ -34,6 +34,8 @@ namespace UkrPoshtaQuest
             this.PersonalMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SalaryReportingMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ContainerPanel = new System.Windows.Forms.Panel();
+            this.відділиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.посадиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,7 +45,9 @@ namespace UkrPoshtaQuest
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MainPageMenuItem,
             this.PersonalMenuItem,
-            this.SalaryReportingMenuItem});
+            this.SalaryReportingMenuItem,
+            this.відділиToolStripMenuItem,
+            this.посадиToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1182, 28);
@@ -78,6 +82,20 @@ namespace UkrPoshtaQuest
             this.ContainerPanel.Size = new System.Drawing.Size(1158, 488);
             this.ContainerPanel.TabIndex = 1;
             // 
+            // відділиToolStripMenuItem
+            // 
+            this.відділиToolStripMenuItem.Name = "відділиToolStripMenuItem";
+            this.відділиToolStripMenuItem.Size = new System.Drawing.Size(73, 24);
+            this.відділиToolStripMenuItem.Text = "Відділи";
+            this.відділиToolStripMenuItem.Click += new System.EventHandler(this.відділиToolStripMenuItem_Click);
+            // 
+            // посадиToolStripMenuItem
+            // 
+            this.посадиToolStripMenuItem.Name = "посадиToolStripMenuItem";
+            this.посадиToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
+            this.посадиToolStripMenuItem.Text = "Посади";
+            this.посадиToolStripMenuItem.Click += new System.EventHandler(this.посадиToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -103,6 +121,8 @@ namespace UkrPoshtaQuest
         private System.Windows.Forms.ToolStripMenuItem PersonalMenuItem;
         private System.Windows.Forms.Panel ContainerPanel;
         private System.Windows.Forms.ToolStripMenuItem SalaryReportingMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem відділиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem посадиToolStripMenuItem;
     }
 }
 

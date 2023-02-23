@@ -39,5 +39,15 @@ namespace UkrPoshtaQuest
             ContainerPanel.Controls.Clear();
             ContainerPanel.Controls.Add(page);
         }
+
+        private void відділиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Скоро буде!");
+        }
+
+        private void посадиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Скоро буде!");
+        }
     }
 }

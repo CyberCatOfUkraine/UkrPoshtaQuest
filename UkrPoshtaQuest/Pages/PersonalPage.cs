@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using UkrPoshtaQuest.DbMagick;
 using UkrPoshtaQuest.Models;
+using UkrPoshtaQuest.Pages.Windows;
 
 namespace UkrPoshtaQuest.Pages
 {
@@ -77,9 +78,9 @@ namespace UkrPoshtaQuest.Pages
 
             //створюємо колонку для відображення кнопки "Редагувати"
             DataGridViewButtonColumn editButtonColumn = new DataGridViewButtonColumn();
-            editButtonColumn.HeaderText = "Редагувати";
+            editButtonColumn.HeaderText = "Картка працівника";
             editButtonColumn.UseColumnTextForButtonValue = true;
-            editButtonColumn.Text = "Редагувати";
+            editButtonColumn.Text = "Картка працівника";
 
             //створюємо колонку для відображення кнопки "Видалити"
             DataGridViewButtonColumn deleteButtonColumn = new DataGridViewButtonColumn();
@@ -149,7 +150,17 @@ namespace UkrPoshtaQuest.Pages
                     UpdateDataGrid();
                 };
                 editCompanyInfoForm.Show();*/
-                MessageBox.Show("edit");
+                EditEmployeeForm editEmployeeForm = new EditEmployeeForm(employeeRepo,
+                    dataGridEmployees[e.RowIndex] as Employee,
+                    departmentRepo.GetAll(),
+                    positionRepo.GetAll(),
+                    addressRepo
+                    );
+                editEmployeeForm.Show();
+                editEmployeeForm.FormClosed += delegate (object sender1, FormClosedEventArgs e2)
+                {
+                    UpdateDataGrid();
+                };
             }
             else if (e.ColumnIndex == 9 && e.RowIndex >= 0)
             {
@@ -198,7 +209,7 @@ namespace UkrPoshtaQuest.Pages
         }
         private void AddEmployeeBtn_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("Скоро буде!");
             UpdateDataGrid();
 
         }
