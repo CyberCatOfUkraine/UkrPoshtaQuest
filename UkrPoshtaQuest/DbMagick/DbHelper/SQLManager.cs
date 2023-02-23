@@ -1,12 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace UkrPoshtaQuest.DbMagick.DbHelper
 {
     public class SQLManager
     {
-        private readonly string _connectionString = @"Data Source=DESKTOP-LSAUK28\SQLEXPRESS;Initial Catalog=TestDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private string _connectionString
+        {
+            get
+            {
+                var directoryName = "AbraCadabra";
+                var fileDefault = @"Data Source=DESKTOP-LSAUK28\SQLEXPRESS;Initial Catalog=TestDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                var directoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), directoryName);
+                var fileName = "connectionString.txt";
+
+
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                    File.WriteAllText(Path.Combine(directoryPath, fileName), fileDefault);
+                }
+                var file = File.ReadAllText(Path.Combine(directoryPath, fileName));
+
+                return file;
+            }
+        }// @"Data Source=DESKTOP-LSAUK28\SQLEXPRESS;Initial Catalog=TestDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         public List<object[]> GetValuesFromDatabase(string query)
         {
             /* using (SqlConnection connection = new SqlConnection(_connectionString))
