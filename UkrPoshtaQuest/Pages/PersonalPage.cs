@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using UkrPoshtaQuest.DataGridHelper;
 using UkrPoshtaQuest.DbMagick;
 using UkrPoshtaQuest.Models;
-using UkrPoshtaQuest.Pages.Windows;
 
 namespace UkrPoshtaQuest.Pages
 {
@@ -17,6 +15,13 @@ namespace UkrPoshtaQuest.Pages
         PositionRepository<Position> positionRepo = new PositionRepository<Position>();
         AddressRespository<Address> addressRepo = new AddressRespository<Address>();
         #endregion
+
+        class DataGridEmployee : Employee
+        {
+            public string DepartmentName { get; set; }
+            public string PositionName { get; set; }
+            public string Address { get; set; }
+        }
 
         List<DataGridEmployee> dataGridEmployees;
         public PersonalPage()
@@ -197,14 +202,76 @@ namespace UkrPoshtaQuest.Pages
             UpdateDataGrid();
 
         }
-        #region Далі не зовсім зручний інтерфейс (жесть)
 
-        private void FilterOpenBtn_Click(object sender, EventArgs e)
+        private void SearchItBtn_Click(object sender, EventArgs e)
         {
-            FormWithEmployeesFilter editCompanyInfoForm = new FormWithEmployeesFilter(dataGridEmployees);
-            editCompanyInfoForm.Show();
-        }
-        #endregion
+            List<DataGridEmployee> employees = dataGridEmployees;
 
+            bool anyFieldFilled =
+    !string.IsNullOrEmpty(FullNameTextBox.Text) ||
+    !string.IsNullOrEmpty(AddressTextBox.Text) ||
+    !string.IsNullOrEmpty(PhoneTextBox.Text) ||
+    !string.IsNullOrEmpty(PositionTextBox.Text) ||
+    !string.IsNullOrEmpty(DepartmentTextBox.Text) ||
+    (DateTime.Now.Year +
+    DateTime.Now.Month +
+    DateTime.Now.Day + ""
+    !=
+    HireDateDateTimePicker.Value.Year +
+    HireDateDateTimePicker.Value.Month +
+    HireDateDateTimePicker.Value.Day + ""
+    );
+
+            if (anyFieldFilled)
+            {
+                employees = employees.Where(emp =>
+                    CheckFullName(emp) &&
+                    CheckAddress(emp) &&
+                    CheckPhone(emp) &&
+                    CheckPosition(emp) &&
+                    CheckDepartment(emp) &&
+                    CheckHireDate(emp)
+                ).ToList();
+            }
+
+            EmployeeDataGridView.DataSource = employees;
+            EmployeeDataGridView.Update();
+            EmployeeDataGridView.Refresh();
+        }
+
+        private bool CheckFullName(DataGridEmployee emp)
+        {
+            return emp.FullName.Contains(FullNameTextBox.Text);
+        }
+        private bool CheckAddress(DataGridEmployee emp)
+        {
+            return emp.Address.Contains(AddressTextBox.Text);
+        }
+
+        private bool CheckPhone(DataGridEmployee emp)
+        {
+            return emp.PhoneNumber.Contains(PhoneTextBox.Text);
+        }
+
+        private bool CheckPosition(DataGridEmployee emp)
+        {
+            return emp.PositionName.Contains(PositionTextBox.Text);
+        }
+
+        private bool CheckDepartment(DataGridEmployee emp)
+        {
+            return emp.DepartmentName.Contains(DepartmentTextBox.Text);
+        }
+
+        private bool CheckHireDate(DataGridEmployee emp)
+        {
+            if (HireDateDateTimePicker.Value.ToString("yyyyMMdd") == DateTime.Now.ToString("yyyyMMdd"))
+            {
+                return true;
+            }
+            string hireDateStr = emp.HireDate.ToString("yyyyMMdd");
+            string chosenDateStr = HireDateDateTimePicker.Value.ToString("yyyyMMdd");
+            return hireDateStr == chosenDateStr;
+        }
     }
 }
