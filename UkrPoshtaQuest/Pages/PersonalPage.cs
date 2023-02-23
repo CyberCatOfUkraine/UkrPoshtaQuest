@@ -164,9 +164,8 @@ namespace UkrPoshtaQuest.Pages
             }
             else if (e.ColumnIndex == 9 && e.RowIndex >= 0)
             {
-                /*companyRepos.Delete(companies[e.RowIndex].Id);
-                UpdateDataGrid();*/
-                MessageBox.Show("del");
+                employeeRepo.Delete(e.RowIndex);
+                UpdateDataGrid();
             }
         }
 
