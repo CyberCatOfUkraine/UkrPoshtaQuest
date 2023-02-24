@@ -20,7 +20,11 @@ namespace UkrPoshtaQuest.DbMagick.DbHelper
                 if (!Directory.Exists(directoryPath))
                 {
                     Directory.CreateDirectory(directoryPath);
+                }
+                if (!File.Exists(Path.Combine(directoryPath, fileName)))
+                {
                     File.WriteAllText(Path.Combine(directoryPath, fileName), fileDefault);
+
                 }
                 var file = File.ReadAllText(Path.Combine(directoryPath, fileName));
 
